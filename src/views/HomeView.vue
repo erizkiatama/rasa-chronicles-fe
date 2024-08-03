@@ -1,19 +1,8 @@
 <template>
-  <header class="header">
-    <div class="navbar">
-      <h2 class="logo">RaSa Chronicles</h2>
-      <nav class="navbar-item">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-        </ul>
-      </nav>
-    </div>
-  </header>
   <main>
     <section class="welcome">
       <div class="welcome-msg-box">
-        <h2>Welcome Humans!</h2>
+        <h2>Welcome Everyone!</h2>
         <p class="welcome-msg">
           Welcome to Our website! We are Ezra and Salsa, a couple with a shared passion for exploring the world, savoring life’s little moments, and celebrating our journey together. This website is our digital scrapbook, where we document our adventures, share our thoughts, and connect with fellow travelers and dreamers.
         </p>
@@ -35,42 +24,9 @@
       </div>
     </section>
   </main>
-  <footer>
-    nda ada isinya
-  </footer>
 </template>
 
 <style>
-/* Start of Header CSS*/
-.header {
-  color: white;
-  background-color: saddlebrown;
-  height: 70px;
-  font-size: 1.1rem;
-}
-
-.navbar {
-  height: 100%;
-  width: 95%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-}
-
-.navbar ul {
-  display: flex;
-  padding: 0;
-}
-
-.navbar ul li {
-  list-style-type: none;
-  padding: 0 10px;
-  margin: 0 5px;
-}
-
-/* End of Header CSS */
-
 /* Start of Welcome CSS */
 
 .welcome {
@@ -113,9 +69,4 @@
 }
 
 /* End of Welcome CSS*/
-
-footer {
-  height: 40px;
-  background-color: saddlebrown;
-}
 </style>
