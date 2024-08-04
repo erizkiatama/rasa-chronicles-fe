@@ -1,72 +1,133 @@
 <template>
-  <main>
-    <section class="welcome">
-      <div class="welcome-msg-box">
-        <h2>Welcome Everyone!</h2>
-        <p class="welcome-msg">
-          Welcome to Our website! We are Ezra and Salsa, a couple with a shared passion for exploring the world, savoring life’s little moments, and celebrating our journey together. This website is our digital scrapbook, where we document our adventures, share our thoughts, and connect with fellow travelers and dreamers.
-        </p>
-        <p class="welcome-msg">
-          Our story began with a mutual love for adventure and curiosity about the world around us. From wandering through bustling city streets to finding tranquility in nature’s hidden gems, we’ve experienced a tapestry of cultures, cuisines, and landscapes that have enriched our lives and strengthened our bond. Through RaSaChronicles, we invite you to join us on this incredible journey.
-        </p>
-        <p class="welcome-msg">
-          Here, you’ll find tales of our travels, from the majestic mountains to the serene beaches, and everything in between. We’ll also share our favorite recipes, inspired by the diverse flavors we’ve encountered, as well as tips and tricks for making the most out of every adventure. But RaSaChronicles is more than just a travel diary; it’s a celebration of life, love, and the joy of experiencing the world together.
-        </p>
-        <p class="welcome-msg">
-          We believe that every moment is an opportunity to create memories, and we hope our stories inspire you to embark on your own adventures. Whether you’re a seasoned traveler or someone who dreams of exploring new horizons, there’s something here for everyone. So, take a look around, get to know us, and let’s explore the world together, one story at a time.
-        </p>
-        <p class="welcome-msg">
-          Thank you for visiting RaSaChronicles. We’re thrilled to have you here and can’t wait to share our journey with you!
-        </p>
-      </div>
-      <div class="welcome-img-box">
-        <img src="../assets/welcome-image-1.jpg" alt="Ezra & Salsa" class="welcome-img">
-      </div>
-    </section>
-  </main>
+  <section class="hero-section">
+    <div class="hero-image">
+      <div class="overlay"></div>
+      <h1 class="hero-title">Our Journey Together</h1>
+      <button class="explore-button" @click="scrollToContent">
+        Explore Our Story
+      </button>
+    </div>
+  </section>
+  <section class="intro-section">
+    <div class="container">
+      <h2 class="intro-title">Welcome to Our Journey</h2>
+      <p class="intro-text">Here, we share our life together, from the books we read to the places we explore. This is a
+        digital scrapbook of our adventures, collections, and everyday moments. Join us as we document our shared
+        experiences and the little things that make our relationship special.</p>
+    </div>
+  </section>
 </template>
 
-<style>
-/* Start of Welcome CSS */
+<script setup>
 
-.welcome {
-  height: calc(100vh - 70px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #C2B280;
+const scrollToContent = () => {
+  // Implement smooth scrolling to the next section
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: 'smooth'
+  })
 }
 
-.welcome-msg-box {
-  width: 500px;
-  height: fit-content;
-  margin-right: 3rem;
+</script>
+
+<style scoped>
+.hero-section {
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: justify;
-  border-color: white;
-  border-style: solid;
+  color: #fff;
+  text-align: center;
+  background-image: url("../assets/testing.jpg");
 }
 
-.welcome-msg-box h2 {
-  margin-bottom: 10px;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.5)
+  );
+  pointer-events: none;
 }
 
-.welcome-msg {
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  z-index: 1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.explore-button {
+  padding: 10px 20px;
   font-size: 1rem;
-  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+  font-family: 'Merriweather', serif;
 }
 
-.welcome-img-box {
-  width: fit-content;
-  height: 500px;
-  margin-left: 3rem;
+.explore-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
-.welcome-img {
-  height: 100%;
+.intro-section {
+  background-color: #F5F5DC; /* Light beige background */
+  padding: 4rem 1rem;
 }
 
-/* End of Welcome CSS*/
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #483C32; /* Warm taupe */
+  margin-bottom: 1rem;
+}
+
+.intro-text {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #3E2C22; /* Dark brown */
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .intro-section {
+    padding: 3rem 1rem;
+  }
+
+  .intro-title {
+    font-size: 1.75rem;
+  }
+
+  .intro-text {
+    font-size: 0.9rem;
+  }
+}
 </style>

@@ -33,7 +33,7 @@
 .header {
   color: white;
   background-color: saddlebrown;
-  height: 70px;
+  height: 60px;
   font-size: 1.1rem;
 }
 
