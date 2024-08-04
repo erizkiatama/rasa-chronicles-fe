@@ -1,4 +1,5 @@
 <template>
+  <!--  Start of Hero Section -->
   <section class="hero-section">
     <div class="hero-image">
       <div class="overlay"></div>
@@ -8,17 +9,51 @@
       </button>
     </div>
   </section>
+  <!--  End of Hero Section -->
+
+  <!--  Start of Intro Section-->
   <section class="intro-section">
     <div class="container">
+      <div class="decorative-line"></div>
       <h2 class="intro-title">Welcome to Our Journey</h2>
       <p class="intro-text">Here, we share our life together, from the books we read to the places we explore. This is a
         digital scrapbook of our adventures, collections, and everyday moments. Join us as we document our shared
         experiences and the little things that make our relationship special.</p>
+      <div class="decorative-line"></div>
+      <RouterLink to="/about-us" class="cta-button">Learn More About Us</RouterLink>
     </div>
   </section>
+  <!--  End of Intro Section-->
+
+  <!--  Start of Featured Collection Section-->
+  <section id="featured-collections">
+    <h2>Featured Collections</h2>
+    <div class="collection-container">
+      <div class="collection" v-for="collection in collections" :key="collection.id">
+        <img :src="collection.image" :alt="collection.title">
+        <h3>{{ collection.title }}</h3>
+        <p>{{ collection.description }}</p>
+        <a :href="collection.link" class="btn">Explore</a>
+      </div>
+    </div>
+  </section>
+  <!--  End of Featured Collection Section-->
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+
+const collections = ref([
+  {
+    id: 1,
+    title: 'Books',
+    image: 'src//assets/testing.jpg',
+    description: 'A glimpse into our literary world.',
+    link: 'books.html'
+  }
+  // ... other collections
+])
 
 const scrollToContent = () => {
   // Implement smooth scrolling to the next section
@@ -48,7 +83,7 @@ const scrollToContent = () => {
   align-items: center;
   color: #fff;
   text-align: center;
-  background-image: url("../assets/testing.jpg");
+  background-image: url("../assets/welcome-image.jpeg");
 }
 
 .overlay {
@@ -91,12 +126,20 @@ const scrollToContent = () => {
 .intro-section {
   background-color: #F5F5DC; /* Light beige background */
   padding: 4rem 1rem;
+  background-image: radial-gradient(#8A9A5B 1px, transparent 1px),
+  radial-gradient(#8A9A5B 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  background-color: rgba(245, 245, 220, 0.8); /* Semi-transparent light beige */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .intro-title {
@@ -111,6 +154,80 @@ const scrollToContent = () => {
   font-size: 1rem;
   line-height: 1.6;
   color: #3E2C22; /* Dark brown */
+  margin-bottom: 1rem;
+}
+
+.decorative-line {
+  height: 2px;
+  background-color: #C66C45; /* Muted terracotta */
+  width: 50px;
+  margin: 1rem auto;
+}
+
+.cta-button {
+  background-color: #8A9A5B; /* Soft sage green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background-color: #7A8A4B; /* Darker shade of soft sage green */
+}
+
+#featured-collections {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.collection-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.collection {
+  text-align: center;
+  margin: 20px;
+  background-color: #F5F5DC; /* Light beige */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.collection img {
+  max-width: 100px;
+  border-radius: 50%;
+}
+
+.collection h3 {
+  color: #3E2C22; /* Dark brown */
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.collection p {
+  color: #483C32; /* Warm taupe */
+  font-family: Merriweather, serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+.btn {
+  background-color: #C66C45; /* Muted terracotta */
+  color: #F5F5DC; /* Light beige */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 @media (max-width: 768px) {
