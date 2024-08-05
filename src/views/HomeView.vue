@@ -26,34 +26,121 @@
   <!--  End of Intro Section-->
 
   <!--  Start of Featured Collection Section-->
-  <section id="featured-collections">
-    <h2>Featured Collections</h2>
-    <div class="collection-container">
-      <div class="collection" v-for="collection in collections" :key="collection.id">
-        <img :src="collection.image" :alt="collection.title">
-        <h3>{{ collection.title }}</h3>
-        <p>{{ collection.description }}</p>
-        <a :href="collection.link" class="btn">Explore</a>
+  <section class="featured-collections">
+    <div class="container">
+      <h2 class="section-title">Our Collections</h2>
+      <div class="collections-grid">
+        <div v-for="collection in collections" :key="collection.title" class="collection-item">
+          <div class="collection-icon" :style="{ backgroundColor: collection.color }">
+            <i :class="collection.icon"></i>
+          </div>
+          <h3 class="collection-title">{{ collection.title }}</h3>
+          <p class="collection-description">{{ collection.description }}</p>
+          <button class="view-button" @click="navigateToCollection(collection.link)">
+            View Collection
+          </button>
+        </div>
       </div>
     </div>
   </section>
   <!--  End of Featured Collection Section-->
+
+  <!--  Start of Gallery Preview Section-->
+  <section class="gallery-preview">
+    <div class="container">
+      <h2 class="section-title">Our Moments</h2>
+      <div class="gallery-grid">
+        <div v-for="(photo, index) in photos" :key="index" class="gallery-item">
+          <img :src="photo.url" :alt="photo.description" class="gallery-image" />
+        </div>
+      </div>
+      <button class="view-more-button" @click="navigateToGallery">View Full Gallery</button>
+    </div>
+  </section>
+  <!--  End of Gallery Preview Section-->
+
+  <!--  Start of About Us Snippet Section-->
+  <section class="about-us-snippet">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <div class="couple-info">
+        <div class="person" v-for="person in couple" :key="person.name">
+          <div class="person-image">
+            <img :src="person.imageUrl" :alt="person.name" />
+          </div>
+          <h3 class="person-name">{{ person.name }}</h3>
+          <p class="person-bio">{{ person.shortBio }}</p>
+        </div>
+      </div>
+      <button class="read-more-button" @click="navigateToAbout">Read Our Full Story</button>
+    </div>
+  </section>
+  <!--  End of About Us Snippet Section-->
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useRouter, RouterLink } from 'vue-router'
+
+const router = useRouter()
 
 const collections = ref([
   {
-    id: 1,
     title: 'Books',
-    image: 'src//assets/testing.jpg',
-    description: 'A glimpse into our literary world.',
-    link: 'books.html'
+    description: 'Our favorite reads and literary adventures.',
+    icon: 'fas fa-book',
+    color: '#8A9A5B',
+    link: '/collections/books'
+  },
+  {
+    title: 'Movies',
+    description: 'Films that have captured our hearts.',
+    icon: 'fas fa-film',
+    color: '#C66C45',
+    link: '/collections/movies'
+  },
+  {
+    title: 'Games',
+    description: 'The games we love to play together.',
+    icon: 'fas fa-gamepad',
+    color: '#483C32',
+    link: '/collections/games'
   }
-  // ... other collections
 ])
+
+const photos = ref([
+  { url: 'src/assets/testing.jpg', description: 'Our trip to the mountains' },
+  { url: 'src/assets/testing.jpg', description: 'Cozy evening at home' },
+  { url: 'src/assets/testing.jpg', description: 'Beach sunset' },
+  { url: 'src/assets/testing.jpg', description: 'City exploration' },
+  { url: 'src/assets/testing.jpg', description: 'Picnic in the park' },
+  { url: 'src/assets/testing.jpg', description: 'Winter wonderland' }
+])
+
+const couple = ref([
+  {
+    name: 'Partner 1',
+    imageUrl: 'src/assets/testing.jpg',
+    shortBio: 'Book lover, coffee enthusiast, and adventure seeker.'
+  },
+  {
+    name: 'Partner 2',
+    imageUrl: 'src/assets/testing.jpg',
+    shortBio: 'Film buff, culinary explorer, and photography hobbyist.'
+  }
+])
+
+const navigateToAbout = () => {
+  router.push('/about-us')
+}
+
+const navigateToGallery = () => {
+  router.push('/gallery')
+}
+
+const navigateToCollection = (link) => {
+  router.push(link)
+}
 
 const scrollToContent = () => {
   // Implement smooth scrolling to the next section
@@ -182,52 +269,223 @@ const scrollToContent = () => {
   background-color: #7A8A4B; /* Darker shade of soft sage green */
 }
 
-#featured-collections {
+.featured-collections {
+  background-color: #F5F5DC;
+  padding: 4rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #483C32;
   text-align: center;
-  margin: 40px 0;
+  margin-bottom: 2rem;
 }
 
-.collection-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
 }
 
-.collection {
+.collection-item {
+  background-color: #FFF;
+  border-radius: 8px;
+  padding: 1.5rem;
   text-align: center;
-  margin: 20px;
-  background-color: #F5F5DC; /* Light beige */
-  border-radius: 10px;
-  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.collection img {
-  max-width: 100px;
+.collection-item:hover {
+  transform: translateY(-5px);
+}
+
+.collection-icon {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1rem;
 }
 
-.collection h3 {
-  color: #3E2C22; /* Dark brown */
-  font-family: Montserrat, sans-serif;
-  font-size: 18px;
-  margin: 10px 0;
+.collection-icon i {
+  font-size: 2rem;
+  color: #FFF;
 }
 
-.collection p {
-  color: #483C32; /* Warm taupe */
-  font-family: Merriweather, serif;
-  font-size: 14px;
-  margin: 0;
+.collection-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  color: #483C32;
+  margin-bottom: 0.5rem;
 }
 
-.btn {
-  background-color: #C66C45; /* Muted terracotta */
-  color: #F5F5DC; /* Light beige */
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
+.collection-description {
+  font-family: 'Merriweather', serif;
+  font-size: 0.9rem;
+  color: #3E2C22;
+  margin-bottom: 1rem;
+}
+
+.view-button {
+  background-color: #8A9A5B;
+  color: #FFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+  background-color: #7A8A4B;
+}
+
+.gallery-preview {
+  background-color: #F5F5DC;
+  padding: 4rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #483C32;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.view-more-button {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  background-color: #C66C45;
+  color: #FFF;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-more-button:hover {
+  background-color: #A55634;
+}
+
+.about-us-snippet {
+  background-color: #F5F5DC;
+  padding: 4rem 1rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #483C32;
+  margin-bottom: 2rem;
+}
+
+.couple-info {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-bottom: 2rem;
+}
+
+.person {
+  flex: 1;
+  max-width: 300px;
+}
+
+.person-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 3px solid #C66C45;
+}
+
+.person-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.person-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  color: #483C32;
+  margin-bottom: 0.5rem;
+}
+
+.person-bio {
+  font-family: 'Merriweather', serif;
+  font-size: 0.9rem;
+  color: #3E2C22;
+  line-height: 1.6;
+}
+
+.read-more-button {
+  background-color: #8A9A5B;
+  color: #FFF;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.read-more-button:hover {
+  background-color: #7A8A4B;
 }
 
 @media (max-width: 768px) {
@@ -245,6 +503,48 @@ const scrollToContent = () => {
 
   .intro-text {
     font-size: 0.9rem;
+  }
+
+  .featured-collections {
+    padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .collections-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-preview {
+    padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-us-snippet {
+    padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .couple-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .person {
+    max-width: 100%;
   }
 }
 </style>
