@@ -27,7 +27,9 @@ import { RouterLink, useRoute } from 'vue-router'
 const menuActive = ref(false)
 const navLinks = ref([
   { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about-us' }
+  { name: 'Collections', path: '/collections' },
+  { name: 'Gallery', path: '/gallery' },
+  { name: 'About Us', path: '/about-us' },
 ])
 
 const isActiveLink = (routePath) => {

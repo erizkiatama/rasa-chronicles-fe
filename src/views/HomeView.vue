@@ -16,11 +16,11 @@
     <div class="container">
       <div class="decorative-line"></div>
       <h2 class="intro-title">Welcome to Our Journey</h2>
-      <p class="intro-text">Here, we share our life together, from the books we read to the places we explore. This is a
+      <p class="intro-text">We're Ezra & Salsa, a couple sharing our journey through life, love, and shared passions.
+        Here, we share our life together, from the books we read to the places we explore. This is a
         digital scrapbook of our adventures, collections, and everyday moments. Join us as we document our shared
         experiences and the little things that make our relationship special.</p>
       <div class="decorative-line"></div>
-      <RouterLink to="/about-us" class="cta-button">Learn More About Us</RouterLink>
     </div>
   </section>
   <!--  End of Intro Section-->
@@ -90,21 +90,21 @@ const collections = ref([
     description: 'Our favorite reads and literary adventures.',
     icon: 'fas fa-book',
     color: '#8A9A5B',
-    link: '/collections/books'
+    link: '/collections'
   },
   {
     title: 'Movies',
     description: 'Films that have captured our hearts.',
     icon: 'fas fa-film',
     color: '#C66C45',
-    link: '/collections/movies'
+    link: '/collections'
   },
   {
     title: 'Games',
     description: 'The games we love to play together.',
     icon: 'fas fa-gamepad',
     color: '#483C32',
-    link: '/collections/games'
+    link: '/collections'
   }
 ])
 
@@ -241,7 +241,8 @@ const scrollToContent = () => {
   font-size: 1rem;
   line-height: 1.6;
   color: #3E2C22; /* Dark brown */
-  margin-bottom: 1rem;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .decorative-line {
@@ -249,24 +250,6 @@ const scrollToContent = () => {
   background-color: #C66C45; /* Muted terracotta */
   width: 50px;
   margin: 1rem auto;
-}
-
-.cta-button {
-  background-color: #8A9A5B; /* Soft sage green */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
-  margin-top: 1rem;
-  text-decoration: none;
-}
-
-.cta-button:hover {
-  background-color: #7A8A4B; /* Darker shade of soft sage green */
 }
 
 .featured-collections {
