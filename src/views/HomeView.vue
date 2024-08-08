@@ -1,3 +1,53 @@
+<script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+
+defineProps({
+  couples: {
+    type: Array
+  }
+})
+
+const collections = ref([
+  {
+    title: 'Books',
+    description: 'Our favorite reads and literary adventures.',
+    icon: 'fas fa-book',
+    color: '#8A9A5B'
+  },
+  {
+    title: 'Movies',
+    description: 'Films that have captured our hearts.',
+    icon: 'fas fa-film',
+    color: '#C66C45'
+  },
+  {
+    title: 'Games',
+    description: 'The games we love to play together.',
+    icon: 'fas fa-gamepad',
+    color: '#483C32'
+  }
+])
+
+// const photos = ref([
+//   { url: 'src/assets/images/testing.jpg', description: 'Our trip to the mountains' },
+//   { url: 'src/assets/images/testing.jpg', description: 'Cozy evening at home' },
+//   { url: 'src/assets/images/testing.jpg', description: 'Beach sunset' },
+//   { url: 'src/assets/images/testing.jpg', description: 'City exploration' },
+//   { url: 'src/assets/images/testing.jpg', description: 'Picnic in the park' },
+//   { url: 'src/assets/images/testing.jpg', description: 'Winter wonderland' }
+// ])
+
+const scrollToContent = () => {
+  // Implement smooth scrolling to the next section
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: 'smooth'
+  })
+}
+
+</script>
+
 <template>
   <!--  Start of Hero Section -->
   <section class="hero-section">
@@ -36,27 +86,28 @@
           </div>
           <h3 class="collection-title">{{ collection.title }}</h3>
           <p class="collection-description">{{ collection.description }}</p>
-          <button class="view-button" @click="navigateToCollection(collection.link)">
+          <RouterLink class="view-button" to="/collection">
             View Collection
-          </button>
+          </RouterLink>
         </div>
       </div>
     </div>
   </section>
   <!--  End of Featured Collection Section-->
 
+  <!-- TODO: Implement this later when the API is ready -->
   <!--  Start of Gallery Preview Section-->
-  <section class="gallery-preview">
-    <div class="container">
-      <h2 class="section-title">Our Moments</h2>
-      <div class="gallery-grid">
-        <div v-for="(photo, index) in photos" :key="index" class="gallery-item">
-          <img :src="photo.url" :alt="photo.description" class="gallery-image" />
-        </div>
-      </div>
-      <button class="view-more-button" @click="navigateToGallery">View Full Gallery</button>
-    </div>
-  </section>
+  <!--  <section class="gallery-preview">-->
+  <!--    <div class="container">-->
+  <!--      <h2 class="section-title">Our Moments</h2>-->
+  <!--      <div class="gallery-grid">-->
+  <!--        <div v-for="(photo, index) in photos" :key="index" class="gallery-item">-->
+  <!--          <img :src="photo.url" :alt="photo.description" class="gallery-image" />-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <RouterLink class="view-more-button" to="/gallery">View Full Gallery</RouterLink>-->
+  <!--    </div>-->
+  <!--  </section>-->
   <!--  End of Gallery Preview Section-->
 
   <!--  Start of About Us Snippet Section-->
@@ -64,93 +115,19 @@
     <div class="container">
       <h2 class="section-title">About Us</h2>
       <div class="couple-info">
-        <div class="person" v-for="person in couple" :key="person.name">
+        <div class="person" v-for="person in couples" :key="person.name">
           <div class="person-image">
-            <img :src="person.imageUrl" :alt="person.name" />
+            <img :src="person.photo" :alt="person.nickname" />
           </div>
-          <h3 class="person-name">{{ person.name }}</h3>
+          <h3 class="person-name">{{ person.nickname }}</h3>
           <p class="person-bio">{{ person.shortBio }}</p>
         </div>
       </div>
-      <button class="read-more-button" @click="navigateToAbout">Read Our Full Story</button>
+      <RouterLink class="read-more-button" to="/about-us">Read Our Full Story</RouterLink>
     </div>
   </section>
   <!--  End of About Us Snippet Section-->
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { useRouter, RouterLink } from 'vue-router'
-
-const router = useRouter()
-
-const collections = ref([
-  {
-    title: 'Books',
-    description: 'Our favorite reads and literary adventures.',
-    icon: 'fas fa-book',
-    color: '#8A9A5B',
-    link: '/collections'
-  },
-  {
-    title: 'Movies',
-    description: 'Films that have captured our hearts.',
-    icon: 'fas fa-film',
-    color: '#C66C45',
-    link: '/collections'
-  },
-  {
-    title: 'Games',
-    description: 'The games we love to play together.',
-    icon: 'fas fa-gamepad',
-    color: '#483C32',
-    link: '/collections'
-  }
-])
-
-const photos = ref([
-  { url: 'src/assets/testing.jpg', description: 'Our trip to the mountains' },
-  { url: 'src/assets/testing.jpg', description: 'Cozy evening at home' },
-  { url: 'src/assets/testing.jpg', description: 'Beach sunset' },
-  { url: 'src/assets/testing.jpg', description: 'City exploration' },
-  { url: 'src/assets/testing.jpg', description: 'Picnic in the park' },
-  { url: 'src/assets/testing.jpg', description: 'Winter wonderland' }
-])
-
-const couple = ref([
-  {
-    name: 'Partner 1',
-    imageUrl: 'src/assets/testing.jpg',
-    shortBio: 'Book lover, coffee enthusiast, and adventure seeker.'
-  },
-  {
-    name: 'Partner 2',
-    imageUrl: 'src/assets/testing.jpg',
-    shortBio: 'Film buff, culinary explorer, and photography hobbyist.'
-  }
-])
-
-const navigateToAbout = () => {
-  router.push('/about-us')
-}
-
-const navigateToGallery = () => {
-  router.push('/gallery')
-}
-
-const navigateToCollection = (link) => {
-  router.push(link)
-}
-
-const scrollToContent = () => {
-  // Implement smooth scrolling to the next section
-  window.scrollTo({
-    top: window.innerHeight,
-    behavior: 'smooth'
-  })
-}
-
-</script>
 
 <style scoped>
 .hero-section {
@@ -170,7 +147,7 @@ const scrollToContent = () => {
   align-items: center;
   color: #fff;
   text-align: center;
-  background-image: url("../assets/welcome-image.jpeg");
+  background-image: url("../assets/images/welcome-image.jpeg");
 }
 
 .overlay {
@@ -328,6 +305,7 @@ const scrollToContent = () => {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
 .view-button:hover {
@@ -390,6 +368,7 @@ const scrollToContent = () => {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
 .view-more-button:hover {
@@ -465,10 +444,15 @@ const scrollToContent = () => {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
 .read-more-button:hover {
   background-color: #7A8A4B;
+}
+
+.pulse-loader {
+  text-align: center;
 }
 
 @media (max-width: 768px) {

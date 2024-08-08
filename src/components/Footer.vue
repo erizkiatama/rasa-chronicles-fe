@@ -1,48 +1,46 @@
-<template>
-  <footer class="footer">
-    <div class="social-links-container">
-      <div class="partner-links">
-        <h4>{{ hisName }}</h4>
-        <div class="social-icons">
-          <a v-for="(link, index) in hisLinks" :key="index" :href="link.url" target="_blank" rel="noopener noreferrer">
-            <i :class="link.icon"></i>
-          </a>
-        </div>
-      </div>
-      <div class="partner-links">
-        <h4>{{ herName }}</h4>
-        <div class="social-icons">
-          <a v-for="(link, index) in herLinks" :key="index" :href="link.url" target="_blank" rel="noopener noreferrer">
-            <i :class="link.icon"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <p class="copyright">&copy; {{ currentYear() }} {{ hisName }} & {{ herName }}. All rights reserved.</p>
-  </footer>
-</template>
-
 <script setup>
-import { ref } from 'vue'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
-const hisName = ref('Ezra')
-const herName = ref('Salsa')
-
-const hisLinks = ref([
-  { icon: 'fab fa-instagram', url: 'https://instagram.com/ezrarizkiatama' },
-  { icon: 'fab fa-facebook', url: 'https://facebook.com/erizkiatama' },
-  { icon: 'fab fa-twitter', url: 'https://twitter.com/ezrarizkiatama' }
-])
-const herLinks = ref([
-  { icon: 'fab fa-instagram', url: 'https://instagram.com/hefasalsabila' },
-  { icon: 'fab fa-facebook', url: 'https://facebook.com/hefa.salsabila' },
-  { icon: 'fab fa-twitter', url: 'https://twitter.com/hefasalsabila' }
-])
+defineProps({
+  couples: {
+    type: Array
+  },
+  isLoading: {
+    type: Boolean,
+    default: true
+  }
+})
 
 const currentYear = () => {
   return new Date().getFullYear()
 }
 </script>
+
+<template>
+  <div class="pulse-loader" v-if="isLoading">
+    <PulseLoader color="#3E2C22" />
+  </div>
+  <footer class="footer" v-else>
+    <div class="social-links-container">
+      <div class="partner-links" v-for="person in couples" :key="person.id">
+        <h4>{{ person.nickname }}</h4>
+        <div class="social-icons">
+          <a :href="person.instagramLink" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a :href="person.facebookLink" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a :href="person.twitterLink" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; {{ currentYear() }} {{ couples.at(0).nickname }} & {{ couples.at(1).nickname }}.
+      All rights reserved.</p>
+  </footer>
+</template>
 
 <style scoped>
 .footer {

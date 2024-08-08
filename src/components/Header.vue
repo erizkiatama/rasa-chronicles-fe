@@ -28,7 +28,8 @@ const menuActive = ref(false)
 const navLinks = ref([
   { name: 'Home', path: '/' },
   { name: 'Collections', path: '/collections' },
-  { name: 'Gallery', path: '/gallery' },
+  // TODO: Implement this later when the API is ready
+  // { name: 'Gallery', path: '/gallery' },
   { name: 'About Us', path: '/about-us' },
 ])
 
